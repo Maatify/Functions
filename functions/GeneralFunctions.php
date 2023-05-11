@@ -93,16 +93,6 @@ class GeneralFunctions
         return $_GET['action'] ?? "index";
     }
 
-    public static function CurrentTime(): string
-    {
-        return date("H:i:s", time());
-    }
-
-    public static function CurrentDate(): string
-    {
-        return date("Y-m-d", time());
-    }
-
     public static function CurrentTimeStamp(): int
     {
         return time();
@@ -111,11 +101,6 @@ class GeneralFunctions
     public static function CurrentMicroTimeStamp(): int
     {
         return round(microtime(true) *1000);
-    }
-
-    public static function CurrentDateTime(): string
-    {
-        return date("Y-m-d H:i:s", time());
     }
 
     public static function DefaultDate(): string
