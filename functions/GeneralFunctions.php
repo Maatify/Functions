@@ -78,44 +78,14 @@ class GeneralFunctions
         return self::CurrentPage() . ':' . $line;
     }
 
-    public static function FirstDateOfNextMonth(): string
-    {
-        return date('Y-m-d', strtotime('first day of next month'));
-    }
-
-    public static function FirstDateOfThisMonth(): string
-    {
-        return date('Y-m-d', strtotime('first day of this month'));
-    }
-
     public static function CurrentAction(): string
     {
         return $_GET['action'] ?? "index";
     }
 
-    public static function CurrentTimeStamp(): int
-    {
-        return time();
-    }
-
     public static function CurrentMicroTimeStamp(): int
     {
         return round(microtime(true) *1000);
-    }
-
-    public static function DefaultDate(): string
-    {
-        return '1900-01-01';
-    }
-
-    public static function DefaultDateTime(): string
-    {
-        return '1900-01-01 00:00:00';
-    }
-
-    public static function IP(): string
-    {
-        return self::UserIp();
     }
 
     public static function ForwardIp(): string
