@@ -40,6 +40,10 @@ class GeneralFunctions
         return $_ENV['CDN_KEY_PORTAL'];
     }
 
+    public static function CdnKeyDashboard(){
+        return $_ENV['CDN_KEY_DASHBOARD'];
+    }
+
     public static function ClearSpaces(string $string) : string{
         return preg_replace(
             '!\s+!',
