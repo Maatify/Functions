@@ -118,12 +118,12 @@ class GeneralFunctions
         return self::UserIp();
     }
 
-    private static function ForwardIp(): string
+    public static function ForwardIp(): string
     {
         return $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
     }
 
-    private static function UserIp(): string
+    public static function UserIp(): string
     {
         return $_SERVER['REMOTE_ADDR'] ?? '';
     }
