@@ -194,7 +194,7 @@ class GeneralFunctions
     public static function ValidateAjaxPage(string $page_without_extension): bool
     {
         if (! empty($_SERVER['HTTP_REFERER'])) {
-            $url = strtok($_SERVER['HTTP_REFERER']);
+            $url = strtok($_SERVER['HTTP_REFERER'], '?');
             if(str_contains($url, GeneralFunctions::HostUrl())
                &&
                basename(strtok($_SERVER['HTTP_REFERER'], '?'), '.php') ?? 'index' == $page_without_extension
