@@ -16,35 +16,41 @@ class GeneralFunctions
         return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 
-    public static function GoogleCaptchaV3SiteKey() : string{
-        if(!empty($_ENV['GRCAPV3STATUS'])){
+    public static function GoogleCaptchaV3SiteKey(): string
+    {
+        if (! empty($_ENV['GRCAPV3STATUS'])) {
             return $_ENV['GRCAPV3SITE'];
-        }else{
+        } else {
             return '';
         }
     }
 
-    public static function GoogleCaptchaV2SiteKey() : string{
-        if(!empty($_ENV['GRCAPV2STATUS'])){
+    public static function GoogleCaptchaV2SiteKey(): string
+    {
+        if (! empty($_ENV['GRCAPV2STATUS'])) {
             return $_ENV['GRCAPV2SITE'];
-        }else{
+        } else {
             return '';
         }
     }
 
-    public static function CdnKeyWebsite(){
+    public static function CdnKeyWebsite()
+    {
         return $_ENV['CDN_KEY_SITE'];
     }
 
-    public static function CdnKeyPortal(){
+    public static function CdnKeyPortal()
+    {
         return $_ENV['CDN_KEY_PORTAL'];
     }
 
-    public static function CdnKeyDashboard(){
+    public static function CdnKeyDashboard()
+    {
         return $_ENV['CDN_KEY_DASHBOARD'];
     }
 
-    public static function ClearSpaces(string $string) : string{
+    public static function ClearSpaces(string $string): string
+    {
         return preg_replace(
             '!\s+!',
             ' ',
@@ -60,10 +66,12 @@ class GeneralFunctions
     public static function ClearComment($string): string
     {
         $string = str_replace(array('\'', "&quot;", "&#039;"), "’", $string);
+
         return self::ClearString($string);
     }
 
-    public static function PageName(): string{
+    public static function PageName(): string
+    {
         return $_SERVER["REQUEST_URI"];
     }
 
@@ -89,7 +97,7 @@ class GeneralFunctions
 
     public static function CurrentMicroTimeStamp(): int
     {
-        return round(microtime(true) *1000);
+        return round(microtime(true) * 1000);
     }
 
     public static function ForwardIp(): string
@@ -112,9 +120,9 @@ class GeneralFunctions
         if ($range < 1) {
             return 0;
         } // not so random...
-        $log    = ceil(log($range, 2));
-        $bytes  = (int)($log / 8) + 1; // length in bytes
-        $bits   = (int)$log + 1; // length in bits
+        $log = ceil(log($range, 2));
+        $bytes = (int)($log / 8) + 1;    // length in bytes
+        $bits = (int)$log + 1;           // length in bits
         $filter = (int)(1 << $bits) - 1; // set all lower bits to 1
         do {
             $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
@@ -126,23 +134,25 @@ class GeneralFunctions
 
     public static function GenerateOTP(int $length = 6): string
     {
-        $token        = '';
+        $token = '';
         $codeAlphabet = '0123456789';
-        $max          = strlen($codeAlphabet); // edited
+        $max = strlen($codeAlphabet); // edited
         for ($i = 0; $i < $length; $i++) {
             $token .= $codeAlphabet[self::crypto_rand_secure($max - 1)];
         }
+
         return $token;
     }
 
     public static function DefaultOneLetter(int $length = 1): string
     {
-        $token        = '';
+        $token = '';
         $codeAlphabet = 'QWERTYPASDFGMNBXZ';
-        $max          = strlen($codeAlphabet); // edited
+        $max = strlen($codeAlphabet); // edited
         for ($i = 0; $i < $length; $i++) {
             $token .= $codeAlphabet[self::crypto_rand_secure($max - 1)];
         }
+
         return $token;
     }
 
@@ -155,16 +165,28 @@ class GeneralFunctions
             default => $day . 'th',
         };
     }
-    
+
     public static function CleanPrettyUrl($string): string
     {
         $string = str_replace(' ', '-', strtolower($string));
         $string = str_replace('_', '-', strtolower($string));
-        return (string) preg_replace('/[^a-z0-9\-]/', '', $string); // Removes special chars.
+
+        return (string)preg_replace('/[^a-z0-9\-]/', '', $string); // Removes special chars.
     }
 
     public static function EchoReplacementWysIsWyg(string $str): string
     {
-        return (string) str_replace(array('"\'', '\'"', "''", "`", /*"’’",*/ "’"), "'", htmlspecialchars_decode(htmlspecialchars_decode(nl2br($str)), ENT_QUOTES));
+        return (string)str_replace(
+            array(
+                '"\'',
+                '\'"',
+                "`",
+                "'’",
+                '’',
+                "’'",
+                '"’',
+                '"’'),
+            "'",
+            htmlspecialchars_decode(htmlspecialchars_decode(nl2br($str)), ENT_QUOTES));
     }
 }
