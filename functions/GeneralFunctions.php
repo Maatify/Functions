@@ -1,9 +1,19 @@
 <?php
+
 /**
- * Created by Maatify.dev
- * User: Maatify.dev
- * Date: 2023-03-21
- * Time: 9:38 AM
+ * @copyright   ©2024 Maatify.dev
+ * @Liberary    Functions
+ * @Project     Functions
+ * @author      Mohamed Abdulalim (megyptm) <mohamed@maatify.dev>
+ * @since       2023-03-21 9:38 AM
+ * @see         https://www.maatify.dev Maatify.com
+ * @link        https://github.com/Maatify/Functions  view project on GitHub
+ * @copyright   ©2023 Maatify.dev
+ *
+ * @note        This program is distributed in the hope that it will be useful - WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
 
 namespace Maatify\Functions;
