@@ -14,7 +14,7 @@ class GeneralFunctions
     public static function HostUrl(): string
     {
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-//        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
+        //        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 
     public static function GoogleCaptchaV3SiteKey(): string
@@ -189,5 +189,19 @@ class GeneralFunctions
                 '"’'),
             "'",
             htmlspecialchars_decode(htmlspecialchars_decode($str/*nl2br($str)*/), ENT_QUOTES));
+    }
+
+    public static function ValidateAjaxPage(string $page_without_extension): bool
+    {
+        if (! empty($_SERVER['HTTP_REFERER'])) {
+            $url = strtok($_SERVER['HTTP_REFERER']);
+            if(str_contains($url, GeneralFunctions::HostUrl()) &&
+               basename(strtok($_SERVER['HTTP_REFERER'], '?'), '.php') ?? 'index' == $page_without_extension
+            ){
+                return true;
+            }
+        }
+
+        return false;
     }
 }
