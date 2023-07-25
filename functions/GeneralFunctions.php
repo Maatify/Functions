@@ -205,4 +205,15 @@ class GeneralFunctions
 
         return false;
     }
+
+    public static function ValidateAjaxIsSameHost(): bool
+    {
+        if(!empty($_SERVER['HTTP_REFERER'])
+           &&
+           $_SERVER['HTTP_HOST'] == parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
+        ){
+            return true;
+        }
+        return false;
+    }
 }
