@@ -165,6 +165,6 @@ class GeneralFunctions
 
     public static function EchoReplacementWysIsWyg(string $str): string
     {
-        return (string) str_replace(array('"\'', '\'"', "''", "`", "’"), "'", htmlspecialchars_decode(htmlspecialchars_decode(nl2br($str)), ENT_QUOTES));
+        return (string) str_replace(array('"\'', '\'"', "''", "`", "’’", "’"), "'", htmlspecialchars_decode(htmlspecialchars_decode(nl2br($str)), ENT_QUOTES));
     }
 }
