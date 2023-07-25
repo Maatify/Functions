@@ -1,7 +1,7 @@
 {
   "name": "maatify/functions",
   "description": "maatify.dev functions handler, known by our team",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "type": "library",
   "keywords": [
     "PHP",
