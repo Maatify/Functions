@@ -17,6 +17,13 @@ class GeneralFunctions
                 return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 
+    public static function HostName(): array|string
+    {
+        $name = str_replace("www.", "", strtolower($_SERVER['HTTP_HOST']));
+        $name =  str_replace(['.com', '.net', '.org', '.dev', '.online', '.info'], "", $name);
+        return strtolower($name);
+    }
+
     public static function GoogleCaptchaV3SiteKey(): string
     {
         if (! empty($_ENV['GRCAPV3STATUS'])) {
