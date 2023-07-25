@@ -20,8 +20,9 @@ class GeneralFunctions
     public static function HostName(): array|string
     {
         $name = str_replace("www.", "", strtolower($_SERVER['HTTP_HOST']));
-        $name =  str_replace(['.com', '.net', '.org', '.dev', '.online', '.info'], "", $name);
-        return strtolower($name);
+        //        $name =  str_replace(['.com', '.net', '.org', '.dev', '.online', '.info'], "", $name);
+        $name = substr($name, 0, strrpos($name, '.'));
+        return strtoupper($name);
     }
 
     public static function GoogleCaptchaV3SiteKey(): string
