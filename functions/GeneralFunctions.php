@@ -13,7 +13,8 @@ class GeneralFunctions
 
     public static function HostUrl(): string
     {
-        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+//        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 
     public static function GoogleCaptchaV3SiteKey(): string
