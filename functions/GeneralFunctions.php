@@ -216,4 +216,9 @@ class GeneralFunctions
         }
         return false;
     }
+
+    public static function Bool2String($var): string
+    {
+        return filter_var($var, FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false';
+    }
 }
