@@ -187,6 +187,6 @@ class GeneralFunctions
                 '"’',
                 '"’'),
             "'",
-            htmlspecialchars_decode(htmlspecialchars_decode(nl2br($str)), ENT_QUOTES));
+            htmlspecialchars_decode(htmlspecialchars_decode($str/*nl2br($str)*/), ENT_QUOTES));
     }
 }
