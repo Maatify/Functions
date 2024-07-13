@@ -41,8 +41,17 @@ class GeneralAgentFunctions
 
     public function __construct()
     {
-        $parser = new UserAgentParser();
-        $this->userAgentParser = $parser();
+//        $parser = new UserAgentParser();
+//        $this->userAgentParser = $parser();
+//        $this->platform = $this->userAgentParser->platform() ?? '';
+//        $this->browser = $this->userAgentParser->browser() ?? '';
+//        $this->browserVersion = $this->userAgentParser->browserVersion() ?? '';
+        $this->reloadByString();
+    }
+
+    public function reloadByString(string|null $user_agent = null): void
+    {
+        $this->userAgentParser = (new UserAgentParser())->parse($user_agent);
         $this->platform = $this->userAgentParser->platform() ?? '';
         $this->browser = $this->userAgentParser->browser() ?? '';
         $this->browserVersion = $this->userAgentParser->browserVersion() ?? '';
@@ -61,5 +70,10 @@ class GeneralAgentFunctions
     public function browserVersion(): string
     {
         return $this->browserVersion;
+    }
+
+    public function userAgent(): UserAgent
+    {
+        return $this->userAgentParser;
     }
 }
