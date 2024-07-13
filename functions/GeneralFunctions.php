@@ -116,7 +116,8 @@ class GeneralFunctions
 
     public static function CurrentMicroTimeStamp(): int
     {
-        return round(microtime(true) * 1000);
+//        return round(microtime(true) * 1000);
+        return intval(microtime(true) * 1000);
     }
 
     public static function ForwardIp(): string
