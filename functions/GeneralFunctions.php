@@ -23,8 +23,8 @@ class GeneralFunctions
 
     public static function HostUrl(): string
     {
-//        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-                return 'https://' . $_SERVER['HTTP_HOST'] . '/';
+        //        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 
     public static function HostName(): array|string
@@ -32,6 +32,7 @@ class GeneralFunctions
         $name = str_replace("www.", "", strtolower($_SERVER['HTTP_HOST']));
         //        $name =  str_replace(['.com', '.net', '.org', '.dev', '.online', '.info'], "", $name);
         $name = substr($name, 0, strrpos($name, '.'));
+
         return strtoupper($name);
     }
 
@@ -116,7 +117,7 @@ class GeneralFunctions
 
     public static function CurrentMicroTimeStamp(): int
     {
-//        return round(microtime(true) * 1000);
+        //        return round(microtime(true) * 1000);
         return intval(microtime(true) * 1000);
     }
 
@@ -214,10 +215,9 @@ class GeneralFunctions
     {
         if (! empty($_SERVER['HTTP_REFERER'])) {
             $url = strtok($_SERVER['HTTP_REFERER'], '?');
-            if(str_contains($url, GeneralFunctions::HostUrl())
-               &&
-               basename(strtok($_SERVER['HTTP_REFERER'], '?'), '.php') ?? 'index' == $page_without_extension
-            ){
+            if (str_contains($url, GeneralFunctions::HostUrl())
+                && basename(strtok($_SERVER['HTTP_REFERER'], '?'), '.php') ?? 'index' == $page_without_extension
+            ) {
                 return true;
             }
         }
@@ -227,17 +227,34 @@ class GeneralFunctions
 
     public static function ValidateAjaxIsSameHost(): bool
     {
-        if(!empty($_SERVER['HTTP_REFERER'])
-           &&
-           $_SERVER['HTTP_HOST'] == parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
-        ){
+        if (! empty($_SERVER['HTTP_REFERER'])
+            && $_SERVER['HTTP_HOST'] == parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
+        ) {
             return true;
         }
+
         return false;
     }
 
     public static function Bool2String($var): string
     {
         return filter_var($var, FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false';
+    }
+
+    public static function maskEmail(string $email): string
+    {
+        [$local, $domain] = explode('@', $email);
+
+        // Mask the local part, keep the first and last characters visible
+        $maskedLocal = substr($local, 0, 1) . str_repeat('*', max(0, strlen($local) - 2)) . substr($local, -1);
+
+        // Split the domain into name and extension (e.g., gmail.com -> gmail and com)
+        [$domainName, $extension] = explode('.', $domain);
+
+        // Mask the domain name, keep the first character visible
+        $maskedDomainName = substr($domainName, 0, 1) . str_repeat('*', max(0, strlen($domainName) - 1));
+
+        // Combine the masked parts
+        return $maskedLocal . '@' . $maskedDomainName . '.' . $extension;
     }
 }
