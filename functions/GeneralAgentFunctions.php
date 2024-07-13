@@ -51,10 +51,17 @@ class GeneralAgentFunctions
 
     public function reloadByString(string|null $user_agent = null): void
     {
-        $this->userAgentParser = (new UserAgentParser())->parse($user_agent);
-        $this->platform = $this->userAgentParser->platform() ?? '';
-        $this->browser = $this->userAgentParser->browser() ?? '';
-        $this->browserVersion = $this->userAgentParser->browserVersion() ?? '';
+        try {
+            $this->userAgentParser = (new UserAgentParser())->parse($user_agent);
+            $this->platform = $this->userAgentParser->platform() ?? '';
+            $this->browser = $this->userAgentParser->browser() ?? '';
+            $this->browserVersion = $this->userAgentParser->browserVersion() ?? '';
+        }catch (\Exception $exception){
+            $this->platform = '';
+            $this->browser = '';
+            $this->browserVersion = '';
+        }
+
     }
 
     public function platform(): string
