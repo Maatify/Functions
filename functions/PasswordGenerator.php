@@ -63,7 +63,7 @@ class PasswordGenerator
 
     public static function specialCharacters(): string
     {
-        return '#$%&*+_-';
+        return '#$%&+_-';
     }
 
     public static function upperAndLowerCase(): string
