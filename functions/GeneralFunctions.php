@@ -24,12 +24,12 @@ class GeneralFunctions
     public static function HostUrl(): string
     {
         //        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
+        return 'https://' . ($_SERVER['HTTP_HOST'] ?? '127.0.0.1') . '/';
     }
 
     public static function HostName(): array|string
     {
-        $name = str_replace("www.", "", strtolower($_SERVER['HTTP_HOST']));
+        $name = str_replace("www.", "", strtolower(($_SERVER['HTTP_HOST']) ?? '127.0.0.1'));
         //        $name =  str_replace(['.com', '.net', '.org', '.dev', '.online', '.info'], "", $name);
         $name = substr($name, 0, strrpos($name, '.'));
 
@@ -56,17 +56,17 @@ class GeneralFunctions
 
     public static function CdnKeyWebsite()
     {
-        return $_ENV['CDN_KEY_SITE'];
+        return $_ENV['CDN_KEY_SITE'] ?? 500;
     }
 
     public static function CdnKeyPortal()
     {
-        return $_ENV['CDN_KEY_PORTAL'];
+        return $_ENV['CDN_KEY_PORTAL'] ?? 500;
     }
 
     public static function CdnKeyDashboard()
     {
-        return $_ENV['CDN_KEY_DASHBOARD'];
+        return $_ENV['CDN_KEY_DASHBOARD'] ?? 500;
     }
 
     public static function ClearSpaces(string $string): string
